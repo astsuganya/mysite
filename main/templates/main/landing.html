@@ -21,6 +21,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
 
         body {
             font-family: 'Inter', sans-serif;
@@ -28,6 +29,88 @@
             color: var(--text-main);
             overflow-x: hidden;
             min-height: 100vh;
+        }
+
+        .users-card {
+            position: fixed;
+            top: 120px;
+            right: 5%;
+            width: 260px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            animation: fadeIn 1.5s ease;
+        }
+
+        .users-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .users-count {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .user-list {
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .user-item {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        .work-card {
+            position: fixed;
+            top: 120px;
+            left: 5%;
+            width: 300px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            animation: fadeIn 1.5s ease;
+        }
+
+        .work-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .work-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .work-item strong {
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .work-item p {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-top: 0.2rem;
+            line-height: 1.4;
         }
 
         /* --- Animated Background --- */
@@ -205,6 +288,37 @@
             <a href="#contact">Contact</a>
         </nav>
     </header>
+
+    <div class="users-card">
+    <h3>Users on Platform</h3>
+    <div class="users-count">{{ users|length }}</div>
+        <div class="user-list">
+            {% for user in users %}
+                <div class="user-item">
+                    {{ user.username }}<br>
+                    <span style="opacity: 0.6;">{{ user.email }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="work-card">
+    <h3>Proof of Work</h3>
+        <div class="user-list">
+            {% for job in jobs %}
+            <div>
+                <strong style="color: #fff;">{{ job.position }} @ {{ job.company.name }}</strong>
+                <p style="font-size: 0.85rem; color: var(--text-dim);">
+                    {{ job.description }}
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-dim);">
+                    {{ job.start_date }} - {% if job.end_date %}{{ job.end_date }}{% else %}Present{% endif %}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
 
     <section class="hero">
         <div class="hero-card">
