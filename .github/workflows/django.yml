@@ -31,7 +31,7 @@ jobs:
 
         working-directory: ./backend # เข้าไปใน folder backend เสมอ
 
-        steps:
+    steps:
 
     - uses: actions/checkout@v4
 
